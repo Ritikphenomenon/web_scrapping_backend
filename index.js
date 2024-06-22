@@ -10,6 +10,24 @@ const fs = require('fs');
 
 const app = express();
 
+const allowedOrigins = [
+  'https://web-scrapping-nine.vercel.app',
+  'http://localhost:5000'
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
+
+
 
 //Ensure the directory for screenshots exists
 const screenshotsDir = path.join(__dirname, 'screenshots');
@@ -20,7 +38,8 @@ if (!fs.existsSync(screenshotsDir)) {
 app.use('/screenshots', express.static(path.join(__dirname, 'screenshots')));
 
 app.use(bodyParser.json());
-app.use(cors());
+
+
 
 // Routes
 const companyRoutes = require('./routes/companyRoutes');
