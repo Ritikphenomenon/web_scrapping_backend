@@ -53,7 +53,7 @@ Access a detailed view of each company, including:
 ### Clone the Project
 
 ```bash
-git clone https://github.com/Ritikphenomenon/jobEngine.git
+git clone https://github.com/Ritikphenomenon/web_scrapping_backend
 ```
 
 ### Running the Client
