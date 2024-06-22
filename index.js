@@ -1,5 +1,3 @@
-
-
 require('dotenv').config(); 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -13,9 +11,6 @@ const fs = require('fs');
 const app = express();
 
 
-
-
-
 //Ensure the directory for screenshots exists
 const screenshotsDir = path.join(__dirname, 'screenshots');
 if (!fs.existsSync(screenshotsDir)) {
@@ -23,13 +18,9 @@ if (!fs.existsSync(screenshotsDir)) {
 }
 
 app.use('/screenshots', express.static(path.join(__dirname, 'screenshots')));
+
 app.use(bodyParser.json());
-
-// Allow access from all origins
-app.use(cors({
-  origin: '*'
-}));
-
+app.use(cors());
 
 // Routes
 const companyRoutes = require('./routes/companyRoutes');
