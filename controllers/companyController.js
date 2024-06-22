@@ -14,7 +14,6 @@ const getCompanies = async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch companies' });
   }
 };
-
 const addCompany = async (req, res) => {
   const { url } = req.body;
 
@@ -29,7 +28,16 @@ const addCompany = async (req, res) => {
   }
 
   try {
-    const browser = await puppeteer.launch({ headless: true });
+    // Determine the executable path for Chrome based on the environment
+    const executablePath = process.env.CHROME_EXECUTABLE_PATH || null;
+
+    // Launch Puppeteer with the appropriate executable path
+    const browser = await puppeteer.launch({
+      executablePath: executablePath,
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
+    
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: 'networkidle2' });
 
