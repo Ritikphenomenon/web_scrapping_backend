@@ -1,4 +1,4 @@
-const Company = require('../models/Company');
+const Company = require('../models/company');
 const puppeteer = require('puppeteer');
 const mongoose = require('mongoose');
 const fs = require('fs');
