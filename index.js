@@ -1,3 +1,5 @@
+
+
 require('dotenv').config(); 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -12,8 +14,10 @@ const app = express();
 
 const allowedOrigins = [
   'https://web-scrapping-nine.vercel.app',
-  'http://localhost:5000'
+  'http://localhost:5000',
+  'http://localhost:5173/'
 ];
+
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -36,7 +40,6 @@ if (!fs.existsSync(screenshotsDir)) {
 }
 
 app.use('/screenshots', express.static(path.join(__dirname, 'screenshots')));
-
 app.use(bodyParser.json());
 
 
